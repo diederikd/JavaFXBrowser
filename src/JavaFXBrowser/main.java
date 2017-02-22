@@ -18,7 +18,7 @@ public class main {
 
                 frame.getContentPane().add(new SwingFXWebView());
 
-                frame.setMinimumSize(new Dimension(640, 480));
+                frame.setMinimumSize(new Dimension(1000, 700));
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
 
