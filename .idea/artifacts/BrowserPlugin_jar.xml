@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="BrowserPlugin:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BrowserPlugin_jar</output-path>
+    <root id="archive" name="BrowserPlugin.jar">
+      <element id="module-output" name="BrowserPlugin" />
+    </root>
+  </artifact>
+</component>
