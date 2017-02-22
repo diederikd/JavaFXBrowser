@@ -65,29 +65,7 @@ public class SwingFXWebView extends JPanel {
 
         setLayout(new BorderLayout());
         add(jfxPanel, BorderLayout.CENTER);
-        //Dimension dimension = new Dimension(2500,1600);
-        //jfxPanel.setMinimumSize(dimension);
-        //this.setMinimumSize(dimension);
-
-        //swingButton = new JButton();
-        //swingButton.addActionListener(new ActionListener() {
-
-        //    @Override
-        //    public void actionPerformed(ActionEvent e) {
-        //        Platform.runLater(new Runnable() {
-
-        //            @Override
-        //            public void run() {
-        //              webEngine.reload();
-         //           }
-
-         //       });
-         //   }
-        // });
-        //swingButton.setText("Reload");
-
-        //add(swingButton, BorderLayout.SOUTH);
-    }
+         }
 
     private void adjustHeight() {
         Platform.runLater(new Runnable(){
@@ -122,31 +100,17 @@ public class SwingFXWebView extends JPanel {
                 stage = new Stage();
                 stage.setResizable(true);
 
-                /* Group root = new Group();
-                root.prefWidth(2500);
-                root.prefHeight(1600);
-                root.minWidth(2500);
-                root.minHeight(1600);
-                Scene scene = new Scene(root,2500,1600);*/
 
                 // Set up the embedded browser:
                 browser = new WebView();
-                browser.setMaxWidth(2500);
-                browser.setMaxHeight(1600);
-                browser.prefWidth(2500);
-                browser.prefHeight(1600);
 
                 webEngine = browser.getEngine();
                 webEngine.load(CurrentURL);
 
                 StackPane pane = new StackPane();
-                pane.minWidth(2500);
-                pane.minHeight(1600);
                 pane.getChildren().add(browser);
 
-                //ObservableList<Node> children = root.getChildren();
-                //children.add(pane);
-                Scene scene = new Scene(pane,2500,1600);
+                Scene scene = new Scene(pane,1000,700);
                 adjustHeight();
                 jfxPanel.setScene(scene);
             }
