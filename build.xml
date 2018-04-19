@@ -111,7 +111,85 @@
   
   <!-- Modules -->
   
-  <import file="${basedir}/module_browserplugin.xml"/>
+  
+  <!-- Module BrowserPlugin -->
+  
+  <dirname property="module.browserplugin.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.browserplugin" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.browserplugin" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.browserplugin" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.browserplugin" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="browserplugin.output.dir" value="${module.browserplugin.basedir}/out/production/BrowserPlugin"/>
+  <property name="browserplugin.testoutput.dir" value="${module.browserplugin.basedir}/out/test/BrowserPlugin"/>
+  
+  <path id="browserplugin.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="browserplugin.module.production.classpath">
+    <path refid="${module.jdk.classpath.browserplugin}"/>
+  </path>
+  
+  <path id="browserplugin.runtime.production.module.classpath">
+    <pathelement location="${browserplugin.output.dir}"/>
+  </path>
+  
+  <path id="browserplugin.module.classpath">
+    <path refid="${module.jdk.classpath.browserplugin}"/>
+    <pathelement location="${browserplugin.output.dir}"/>
+  </path>
+  
+  <path id="browserplugin.runtime.module.classpath">
+    <pathelement location="${browserplugin.testoutput.dir}"/>
+    <pathelement location="${browserplugin.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.browserplugin">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.browserplugin">
+    <patternset refid="excluded.from.module.browserplugin"/>
+  </patternset>
+  
+  <path id="browserplugin.module.sourcepath">
+    <dirset dir="${module.browserplugin.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.browserplugin" depends="compile.module.browserplugin.production,compile.module.browserplugin.tests" description="Compile module BrowserPlugin"/>
+  
+  <target name="compile.module.browserplugin.production" depends="register.custom.compilers" description="Compile module BrowserPlugin; production classes">
+    <mkdir dir="${browserplugin.output.dir}"/>
+    <javac2 destdir="${browserplugin.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.browserplugin}/javac">
+      <compilerarg line="${compiler.args.browserplugin}"/>
+      <bootclasspath refid="browserplugin.module.bootclasspath"/>
+      <classpath refid="browserplugin.module.production.classpath"/>
+      <src refid="browserplugin.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.browserplugin"/>
+    </javac2>
+    
+    <copy todir="${browserplugin.output.dir}">
+      <fileset dir="${module.browserplugin.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.browserplugin.tests" depends="register.custom.compilers,compile.module.browserplugin.production" description="compile module BrowserPlugin; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.browserplugin" description="cleanup module">
+    <delete dir="${browserplugin.output.dir}"/>
+    <delete dir="${browserplugin.testoutput.dir}"/>
+  </target>
   
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
