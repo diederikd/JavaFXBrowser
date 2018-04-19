@@ -62,7 +62,6 @@ public class SwingFXWebView extends JPanel {
 
         jfxPanel = new JFXPanel();
         createScene();
-
         setLayout(new BorderLayout());
         add(jfxPanel, BorderLayout.CENTER);
          }
@@ -100,7 +99,6 @@ public class SwingFXWebView extends JPanel {
                 stage = new Stage();
                 stage.setResizable(true);
 
-
                 // Set up the embedded browser:
                 browser = new WebView();
 
@@ -109,9 +107,9 @@ public class SwingFXWebView extends JPanel {
 
                 StackPane pane = new StackPane();
                 pane.getChildren().add(browser);
-
-                Scene scene = new Scene(pane,1000,700);
-                adjustHeight();
+                Scene scene = new Scene(pane);
+                //Scene scene = new Scene(pane,1000,700);
+                // adjustHeight();
                 jfxPanel.setScene(scene);
             }
         });
